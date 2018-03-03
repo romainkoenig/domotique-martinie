@@ -2,7 +2,8 @@
   <div>
     <div class="hello">
       <div>
-        <el-button type="primary" v-on:click="getMessage">{{msg}}</el-button>
+        <el-button type="primary" v-on:click="getMessage">get</el-button>
+        <el-button type="warning" v-on:click="postMessage">POST</el-button>
       </div>
     </div>
     <ul v-if="posts && posts.length">
@@ -36,6 +37,16 @@ export default {
     getMessage: function getMessage() {
       axios.get('http://jsonplaceholder.typicode.com/posts').then((response) => {
         this.posts = response.data;
+      }).catch((e) => {
+        this.errors.push(e);
+      });
+    },
+    postMessage: function getMessage() {
+      axios.post('http://localhost:3000/gpio', {
+        gpio: '1',
+        value: 2,
+      }).then((response) => {
+        console.log(response);
       }).catch((e) => {
         this.errors.push(e);
       });
