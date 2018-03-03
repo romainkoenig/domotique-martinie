@@ -3,7 +3,8 @@
     <div class="hello">
       <div>
         <el-button type="primary" v-on:click="getMessage">get</el-button>
-        <el-button type="warning" v-on:click="postMessage">POST</el-button>
+        <el-button type="success" v-on:click="allumer">ALLUMER</el-button>
+        <el-button type="error" v-on:click="eteindre">ETEINDRE</el-button>
       </div>
     </div>
     <ul v-if="posts && posts.length">
@@ -41,10 +42,20 @@ export default {
         this.errors.push(e);
       });
     },
-    postMessage: function getMessage() {
-      axios.post('http://localhost:3000/gpio', {
+    allumer: function getMessage() {
+      axios.post('https://30d11820.ngrok.io/gpio', {
         gpio: '1',
-        value: 2,
+        value: 1,
+      }).then((response) => {
+        console.log(response);
+      }).catch((e) => {
+        this.errors.push(e);
+      });
+    },
+    eteindre: function getMessage() {
+      axios.post('https://30d11820.ngrok.io/gpio', {
+        gpio: '1',
+        value: 0,
       }).then((response) => {
         console.log(response);
       }).catch((e) => {
